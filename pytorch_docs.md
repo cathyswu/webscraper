@@ -18,6 +18,12 @@
 [](https://docs.pytorch.org/docs/stable/index.html)
 Table of Contents [](https://docs.pytorch.org/docs/stable/index.html)
 [2.7 ▼](https://pytorch.org/docs/versions.html)
+|  | [×](javascript:void\(0\) "Clear search box")  
+---|---  
+search |   
+Custom Search
+|  Sort by: Relevance Relevance Date  
+---|---  
 Google Search  Classic Search 
 Community[ - ][ + ]
   * [PyTorch Governance | Build + CI](https://docs.pytorch.org/docs/stable/community/build_ci_governance.html)
@@ -313,6 +319,7 @@ Libraries
 
 
 [Next ![](https://docs.pytorch.org/docs/stable/_static/images/chevron-right-orange.svg)](https://docs.pytorch.org/docs/stable/community/build_ci_governance.html "PyTorch Governance | Build + CI")
+* * *
 © Copyright PyTorch Contributors. 
 Built with [Sphinx](http://sphinx-doc.org/) using a [theme](https://github.com/rtfd/sphinx_rtd_theme) provided by [Read the Docs](https://readthedocs.org). 
   * [PyTorch documentation](https://docs.pytorch.org/docs/stable/index.html)
@@ -404,3 +411,5 @@ To analyze traffic and optimize your experience, we serve cookies on this site. 
     * [Contact Us](https://pytorch.org/contact-us)
 
 
+|   
+---|---
