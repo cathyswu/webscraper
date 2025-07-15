@@ -75,8 +75,10 @@ async def main():
     run_config = CrawlerRunConfig(
         markdown_generator=md_generator,
         # Content filtering
-        word_count_threshold=10,
-        excluded_tags=['form', 'header'],
+        word_count_threshold=30,
+        excluded_tags=[
+            "form", "header", "footer", "nav", "aside", "script", "style"
+        ],
         exclude_external_links=True,
 
         # Content processing
@@ -86,7 +88,9 @@ async def main():
         
         deep_crawl_strategy=strategy,
         scraping_strategy=LXMLWebScrapingStrategy(),
-        verbose=True
+        verbose=True,
+        #=["sphinxsidebar", "related", "headerlinks", "nav"],
+        #excluded_ids=["top", "bottom", "searchbox"]
         
         # Cache control
         # cache_mode=CacheMode.ENABLED  # Use cache if available
