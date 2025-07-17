@@ -27,30 +27,9 @@ from crawl4ai.async_configs import BrowserConfig
 
     md_generator = DefaultMarkdownGenerator(content_filter=prune_filter)
 
-    # scorer = KeywordRelevanceScorer(
-    #     keywords=[
-    #         # Core PyTorch concepts
-    #         "pytorch", "tensor", "torch.nn", "autograd", "gradient",
-    #         "neural network", "deep learning", "model", "layer",
-            
-    #         # Common operations
-    #         "forward", "backward", "loss", "optimizer", "training",
-    #         "inference", "module", "parameter", "requires_grad",
-            
-    #         # Data types and operations
-    #         "float32", "cuda", "device", "dtype", "reshape", "view",
-    #         "matmul", "conv2d", "linear", "relu", "softmax",
-            
-    #         # Advanced concepts
-    #         "distributed", "jit", "torchscript", "onnx", "quantization"
-    #     ],
-    #     weight=0.5
-    # )
-
     strategy = BestFirstCrawlingStrategy(
         max_depth=2,
         include_external=False,
-        # url_scorer=scorer,
         max_pages=200,
         filter_chain = filter_chain
     )
