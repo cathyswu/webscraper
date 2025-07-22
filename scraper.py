@@ -1,10 +1,10 @@
 import asyncio
-from crawl4ai import AsyncWebCrawler, BestFirstCrawlingStrategy, CrawlerRunConfig, DomainFilter, FilterChain, KeywordRelevanceScorer, LXMLWebScrapingStrategy, URLPatternFilter, ContentTypeFilter
+from crawl4ai import AsyncWebCrawler, BestFirstCrawlingStrategy, CrawlerRunConfig, DomainFilter, FilterChain, LXMLWebScrapingStrategy, ContentTypeFilter
 from crawl4ai.content_filter_strategy import PruningContentFilter
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.async_configs import BrowserConfig, CrawlerRunConfig
 import json
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] = None) -> FilterChain:
     """Create filter chain with domain and content type filters"""
@@ -175,8 +175,166 @@ async def main():
         "css_selector": "#main-content", 
         "output_file": "usgs_geospatial.json"
     }
+
+    python_org_config = {
+        "start_url": "https://docs.python.org/3/",
+        "allowed_domains": ["python.org", "docs.python.org"],
+        "max_depth": 3,
+        "max_pages": 300,
+        "css_selector": ".main-content, .document, .section, [role='main'], .body",
+        "output_file": "python_org_docs.json"
+    }
     
-    selected_config = usgs_config
+    typescript_config = {
+        "start_url": "https://www.typescriptlang.org/docs/",
+        "allowed_domains": ["typescriptlang.org"],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": ".handbook-content, [role='main']",
+        "output_file": "typescript_docs.json"
+    }
+
+    go_config = {
+        "start_url": "https://go.dev/doc/",
+        "allowed_domains": [""],
+        "blocked_domains": ["https://go.dev/dl/"],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": "#main-content, #content",
+        "output_file": "go_docs.json"
+    }
+
+    django_config = {
+        "start_url": "https://docs.djangoproject.com/en/5.2/",
+        "allowed_domains": ["docs.djangoproject.com"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": "article#docs-content",
+        "output_file": "django_docs.json"
+    }
+
+    flask_config = {
+        "start_url": "https://flask.palletsprojects.com/en/stable/",
+        "allowed_domains": ["flask.palletsprojects.com"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": ".body, [role='main']",
+        "output_file": "flask_docs.json"
+    }
+
+    java_config = {
+        "start_url": "https://docs.oracle.com/en/java/javase/24/docs/api/index.html",
+        "allowed_domains": ["docs.oracle.com"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": "[role='main']",
+        "output_file": "java_docs.json"
+    }
+
+    node_config = {
+        "start_url": "https://nodejs.org/docs/latest/api/",
+        "allowed_domains": ["nodejs.org"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": "[role='main'], #apicontent",
+        "output_file": "node_docs.json"
+    }
+
+    react_config = {
+        "start_url": "https://react.dev/reference/react",
+        "allowed_domains": ["react.dev"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": ".min-w-0.isolate",
+        "output_file": "react_docs.json"
+    }
+
+    angular_config = {
+        "start_url": "https://angular.dev/overview",
+        "allowed_domains": ["angular.dev"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 300,
+        "css_selector": ".docs-viewer.docs-with-TOC",
+        "output_file": "angular_docs.json"
+    }
+
+    numpy_config = {
+        "start_url": "https://numpy.org/doc/stable/",
+        "allowed_domains": ["numpy.org"],
+        "blocked_domains": [],
+        "max_depth": 5,
+        "max_pages": 400,
+        "css_selector": "#main-content, .main.bd-main, [role='main']",
+        "output_file": "numpy_docs.json"
+    }
+
+    opencv_config = {
+        "start_url": "https://docs.opencv.org/4.x/",
+        "allowed_domains": ["docs.opencv.org"],
+        "blocked_domains": [],
+        "max_depth": 5,
+        "max_pages": 400,
+        "css_selector": ".textblock",
+        "output_file": "opencv_docs.json"
+    }
+
+    javascript_config = {
+        "start_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "allowed_domains": ["developer.mozilla.org"],
+        "blocked_domains": [],
+        "max_depth": 3,
+        "max_pages": 300,
+        "css_selector": ".main-page-content",
+        "output_file": "javascript_docs.json"
+    }
+
+    jsdoc_config = {
+        "start_url": "https://jsdoc.app/",
+        "allowed_domains": ["jsdoc.app"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 400,
+        "css_selector": "article",
+        "output_file": "jsdoc_docs.json"
+    }
+
+    material_angular_config = {
+        "start_url": "https://material.angular.dev/guides",
+        "allowed_domains": ["material.angular.dev"],
+        "blocked_domains": [],
+        "max_depth": 4,
+        "max_pages": 400,
+        "css_selector": "main, .docs-markdown",
+        "output_file": "material_angular_docs.json"
+    }
+
+    cuda_config = {
+        "start_url": "https://docs.nvidia.com/cuda/",
+        "allowed_domains": ["docs.nvidia.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "[role='main'], .document",
+        "output_file": "cuda_docs.json"
+    }
+
+    defensive_programming_config = {
+        "start_url": "https://en.wikipedia.org/wiki/Defensive_programming",
+        "allowed_domains": ["en.wikipedia.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "#content",
+        "output_file": "defensive_programming.json"
+    }
+
+    selected_config = opencv_config
     
     content_dict = await crawl_website(**selected_config)
     

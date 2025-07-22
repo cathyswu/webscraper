@@ -20,7 +20,7 @@ async def main():
 
     async with AsyncWebCrawler(config=browser_config) as crawler:
         result = await crawler.arun(
-            url="https://docs.pytorch.org/docs/stable/index.html",
+            url="https://go.dev/doc/",
             config=run_config
         )
 
