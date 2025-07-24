@@ -1,10 +1,10 @@
 import asyncio
+import json
+from typing import Dict, List
 from crawl4ai import AsyncWebCrawler, BestFirstCrawlingStrategy, CrawlerRunConfig, DomainFilter, FilterChain, LXMLWebScrapingStrategy, ContentTypeFilter
 from crawl4ai.content_filter_strategy import PruningContentFilter
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.async_configs import BrowserConfig, CrawlerRunConfig
-import json
-from typing import Dict, List
 
 def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] = None) -> FilterChain:
     """Create filter chain with domain and content type filters"""
@@ -18,6 +18,7 @@ def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] =
         ),
         ContentTypeFilter(allowed_types=["text/html"])
     ]
+
     return FilterChain(filters)
 
 def create_markdown_generator(prune_threshold: float = 0.4) -> DefaultMarkdownGenerator:
@@ -319,7 +320,7 @@ async def main():
         "allowed_domains": ["docs.nvidia.com"],
         "blocked_domains": [],
         "max_depth": 2,
-        "max_pages": 200,
+        "max_pages": 50,
         "css_selector": "[role='main'], .document",
         "output_file": "cuda_docs.json"
     }
@@ -334,7 +335,7 @@ async def main():
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = opencv_config
+    selected_config = defensive_programming_config
     
     content_dict = await crawl_website(**selected_config)
     
