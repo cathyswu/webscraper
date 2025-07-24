@@ -222,7 +222,7 @@ async def main():
         "blocked_domains": [],
         "max_depth": 4,
         "max_pages": 300,
-        "css_selector": "article#docs-content",
+        "css_selector": "article#docs-content, #docs-content, main, #main-content, article",
         "output_file": "django_docs.json"
     }
 
