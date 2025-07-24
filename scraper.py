@@ -185,6 +185,11 @@ async def main():
         "max_depth": 2,
         "max_pages": 150,
         "css_selector": "#main-content", 
+        "seo_keywords": 
+            ["GIS", "remote sensing", "geospatial analysis", "spatial data", "topography",
+            "satellite imagery", "geographic information system", "elevation models",
+            "coordinate systems", "georeferencing", "spatial resolution", "land cover",
+            "cartography", "shapefile", "geodatabase", "map projection", "terrain analysis"],
         "output_file": "usgs_geospatial.json"
     }
 
@@ -208,8 +213,7 @@ async def main():
 
     go_config = {
         "start_url": "https://go.dev/doc/",
-        "allowed_domains": [""],
-        "blocked_domains": ["https://go.dev/dl/"],
+        "allowed_domains": ["go.dev"],
         "max_depth": 4,
         "max_pages": 300,
         "css_selector": "#main-content, #content",
@@ -252,7 +256,7 @@ async def main():
         "blocked_domains": [],
         "max_depth": 4,
         "max_pages": 300,
-        "css_selector": "[role='main'], #apicontent",
+        "css_selector": "main, [role='main'], #apicontent",
         "output_file": "node_docs.json"
     }
 
@@ -293,7 +297,7 @@ async def main():
         "blocked_domains": [],
         "max_depth": 5,
         "max_pages": 400,
-        "css_selector": ".textblock",
+        "css_selector": ".textblock, .contents",
         "output_file": "opencv_docs.json"
     }
 
@@ -370,7 +374,7 @@ async def main():
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = django_config
+    selected_config = usgs_config
     
     content_dict = await crawl_website(**selected_config)
     
