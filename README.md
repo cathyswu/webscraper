@@ -40,6 +40,8 @@ A comprehensive asynchronous web scraping tool built with [Crawl4AI](https://doc
    crawl4ai-doctor
    ```
 
+   If you're getting import errors, make sure the package is installed in the correct Python environment.
+   
    If you encounter any browser-related issues, you can install them manually:
    ```bash
    python -m playwright install --with-deps chromium

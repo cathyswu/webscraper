@@ -370,7 +370,7 @@ async def main():
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = defensive_programming_config
+    selected_config = django_config
     
     content_dict = await crawl_website(**selected_config)
     
