@@ -25,15 +25,24 @@ A comprehensive asynchronous web scraping tool built with [Crawl4AI](https://doc
    cd webscraper
    ```
 
-2. **Create virtual environment (recommended)**
+2. **Install Crawl4AI**
    ```bash
-   python -m venv crawler_env
-   source crawler_env/bin/activate  # On Windows: crawler_env\Scripts\activate
+   # Install the package
+   pip install -U crawl4ai
+
+   # For pre release versions
+   pip install crawl4ai --pre
+
+   # Run post-installation setup
+   crawl4ai-setup
+
+   # Verify your installation
+   crawl4ai-doctor
    ```
 
-3. **Install dependencies**
+   If you encounter any browser-related issues, you can install them manually:
    ```bash
-   pip install -r requirements.txt
+   python -m playwright install --with-deps chromium
    ```
 
 ## Configuration Parameters
