@@ -73,6 +73,10 @@ def should_skip_content(markdown: str, url: str, skip_patterns: List[str]) -> bo
         print(f"Skipped malformed URL: {url}")
         return True
     
+    if len(markdown) < 10:
+            print(f"❗Skipped empty/short content ({len(markdown)} chars): {url}")
+            return True
+    
     for pattern in skip_patterns:
         if pattern in markdown:
             print(f"Skipped content with pattern '{pattern}': {url}")
@@ -261,7 +265,8 @@ async def main():
         "blocked_domains": [],
         "max_depth": 4,
         "max_pages": 300,
-        "css_selector": ".docs-viewer.docs-with-TOC",
+        "css_selector": "docs-docs, docs-viewer, .docs-viewer, .docs-with-TOC",
+        "skip_patterns": ["If you think this is a mistake"],
         "output_file": "angular_docs.json"
     }
 
@@ -335,7 +340,7 @@ async def main():
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = defensive_programming_config
+    selected_config = angular_config
     
     content_dict = await crawl_website(**selected_config)
     
