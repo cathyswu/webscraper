@@ -374,7 +374,67 @@ async def main():
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = usgs_config
+    rust_config = {
+        "start_url": "https://doc.rust-lang.org/stable/",
+        "allowed_domains": ["doc.rust-lang.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 400,
+        "css_selector": ".rustdoc, #main-content, #content, .content, main",
+        "output_file": "rust_docs.json"
+    }
+
+    vue_config = {
+        "start_url": "https://vuejs.org/api/",
+        "allowed_domains": ["vuejs.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "main, .content",
+        "output_file": "vue_docs.json"
+    }
+
+    springboot_config = {
+        "start_url": "https://docs.spring.io/spring-boot/documentation.html",
+        "allowed_domains": ["docs.spring.io"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": ".doc, [role='main'], main",
+        "output_file": "springboot_docs.json"
+    }
+
+    dotnet_config = {
+        "start_url": "https://learn.microsoft.com/en-us/dotnet/framework/",
+        "allowed_domains": ["learn.microsoft.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "#main, main, [role='main']",
+        "output_file": "springboot_docs.json"
+    }
+
+    restapi_config = {
+        "start_url": "https://docs.github.com/en/rest?apiVersion=2022-11-28",
+        "allowed_domains": ["docs.github.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "#main-content, main",
+        "output_file": "restapi_docs.json"
+    }
+
+    html_config = {
+        "start_url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+        "allowed_domains": ["developer.mozilla.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": ".main-content, main, #content",
+        "output_file": "html_docs.json"
+    }
+
+    selected_config = html_config
     
     content_dict = await crawl_website(**selected_config)
     
