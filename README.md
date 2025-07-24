@@ -52,7 +52,8 @@ Each configuration supports the following parameters:
 - `css_selector` (str, optional): CSS selector to target specific content areas
 - `excluded_tags` (List[str], optional): HTML tags to exclude from content
 - `skip_patterns` (List[str], optional): Text patterns that trigger page skipping
-- `prune_threshold` (float): Content pruning threshold (0.0-1.0)
+- `prune_threshold` (float, optional): Content pruning threshold (0.0-1.0)
+- `seo_keywords` (List[str], optional): Specific keywords in page metadata
 
 ## Running the Script
 

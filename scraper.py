@@ -3,10 +3,11 @@ import json
 from typing import Dict, List
 from crawl4ai import AsyncWebCrawler, BestFirstCrawlingStrategy, CrawlerRunConfig, DomainFilter, FilterChain, LXMLWebScrapingStrategy, ContentTypeFilter
 from crawl4ai.content_filter_strategy import PruningContentFilter
+from crawl4ai.deep_crawling.filters import SEOFilter
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.async_configs import BrowserConfig, CrawlerRunConfig
 
-def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] = None) -> FilterChain:
+def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] = None, seo_keywords: List[str] = None) -> FilterChain:
     """Create filter chain with domain and content type filters"""
     if blocked_domains is None:
         blocked_domains = []
@@ -18,6 +19,9 @@ def create_filter_chain(allowed_domains: List[str], blocked_domains: List[str] =
         ),
         ContentTypeFilter(allowed_types=["text/html"])
     ]
+
+    if seo_keywords:
+        filters.append(SEOFilter(threshold=0.5, keywords=seo_keywords))
 
     return FilterChain(filters)
 
@@ -43,13 +47,13 @@ def create_crawling_strategy(max_depth: int, max_pages: int, allowed_domains: Li
 
 def create_run_config(max_depth: int, max_pages: int, allowed_domains: List[str], 
                      blocked_domains: List[str] = None, css_selector: str = None,
-                     excluded_tags: List[str] = None, prune_threshold: float = 0.4) -> CrawlerRunConfig:
+                     excluded_tags: List[str] = None, prune_threshold: float = 0.4, seo_keywords: List[str] = None) -> CrawlerRunConfig:
     """Create crawler run configuration"""
     if excluded_tags is None:
         excluded_tags = ["form", "header", "footer", "nav", "aside", "script", "style"]
     
     md_generator = create_markdown_generator(prune_threshold)
-    strategy = create_crawling_strategy(max_depth, max_pages, allowed_domains, blocked_domains)
+    strategy = create_crawling_strategy(max_depth, max_pages, allowed_domains, blocked_domains, seo_keywords)
     
     config_params = {
         'markdown_generator': md_generator,
@@ -113,7 +117,7 @@ def save_results(content_dict: Dict[str, str], output_file: str):
 async def crawl_website(start_url: str, allowed_domains: List[str], blocked_domains: List[str] = None,
                        max_depth: int = 2, max_pages: int = 200, css_selector: str = None,
                        excluded_tags: List[str] = None, skip_patterns: List[str] = None,
-                       prune_threshold: float = 0.4, output_file: str = "crawl_results.json") -> Dict[str, str]:
+                       prune_threshold: float = 0.4, seo_keywords: List[str] = None, output_file: str = "crawl_results.json") -> Dict[str, str]:
     
     
     """Main crawling function"""
@@ -121,6 +125,8 @@ async def crawl_website(start_url: str, allowed_domains: List[str], blocked_doma
         blocked_domains = []
     if skip_patterns is None:
         skip_patterns = []
+    if seo_keywords is None:
+        seo_keywords = []
     
     print(f"Starting crawl for: {start_url}")
     
@@ -132,7 +138,8 @@ async def crawl_website(start_url: str, allowed_domains: List[str], blocked_doma
         blocked_domains=blocked_domains,
         css_selector=css_selector,
         excluded_tags=excluded_tags,
-        prune_threshold=prune_threshold
+        prune_threshold=prune_threshold,
+        seo_keywords=seo_keywords
     )
     
     async with AsyncWebCrawler(config=browser_config) as crawler:
@@ -324,7 +331,7 @@ async def main():
         "start_url": "https://docs.nvidia.com/cuda/",
         "allowed_domains": ["docs.nvidia.com"],
         "blocked_domains": [],
-        "max_depth": 2,
+        "max_depth": 1,
         "max_pages": 50,
         "css_selector": "[role='main'], .document",
         "output_file": "cuda_docs.json"
@@ -337,10 +344,33 @@ async def main():
         "max_depth": 2,
         "max_pages": 200,
         "css_selector": "#content",
+        "seo_keywords": [
+            "input validation",
+            "error handling",
+            "exception handling",
+            "assertions",
+            "fail-safe defaults",
+            "sanitization",
+            "fail fast"
+            "guard clauses",
+            "code contracts",
+            "redundancy",
+            "exception safety",
+            "preconditions",
+            "postconditions",
+            "defensive copying",
+            "null checks",
+            "immutable objects",
+            "graceful degradation",
+            "boundary checks",
+            "secure coding",
+            "fault tolerance",
+            "robustness",
+        ],
         "output_file": "defensive_programming.json"
     }
 
-    selected_config = angular_config
+    selected_config = defensive_programming_config
     
     content_dict = await crawl_website(**selected_config)
     
