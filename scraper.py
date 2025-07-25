@@ -434,7 +434,117 @@ async def main():
         "output_file": "html_docs.json"
     }
 
-    selected_config = html_config
+    git_config = {
+        "start_url": "https://git-scm.com/docs",
+        "allowed_domains": ["git-scm.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "#main",
+        "output_file": "git_docs.json"
+    }
+
+    docker_config = {
+        "start_url": "https://docs.docker.com/reference/",
+        "allowed_domains": ["docs.docker.com"],
+        "blocked_domains": [],
+        "max_depth": 3,
+        "max_pages": 400,
+        "css_selector": "article",
+        "output_file": "docker_docs.json"
+    }
+
+    kubernetes_config = {
+        "start_url": "https://kubernetes.io/docs/home/",
+        "allowed_domains": ["kubernetes.io"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 200,
+        "css_selector": "main, [role='main']",
+        "output_file": "kubernetes_docs.json"
+    }
+
+    terraform_config = {
+        "start_url": "https://developer.hashicorp.com/terraform/docs",
+        "allowed_domains": ["developer.hashicorp.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "main, #main",
+        "output_file": "terraform_docs.json"
+    }
+
+    ansible_config = {
+        "start_url": "https://docs.ansible.com/ansible/latest/index.html",
+        "allowed_domains": ["docs.ansible.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "[itemprop='articleBody']",
+        "output_file": "ansible_docs.json"
+    }
+
+    jenkins_config = {
+        "start_url": "https://www.jenkins.io/doc/book/getting-started/",
+        "allowed_domains": ["www.jenkins.io"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": ".ctc, .col-lg-9",
+        "output_file": "jenkins_docs.json"
+    }
+
+    grafana_config = {
+        "start_url": "https://grafana.com/docs/",
+        "allowed_domains": ["grafana.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": ".main-content, main, #main",
+        "output_file": "grafana_docs.json"
+    }
+
+    nginx_config = {
+        "start_url": "https://nginx.org/en/docs/",
+        "allowed_domains": ["nginx.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "#content",
+        "output_file": "nginx_docs.json"
+    }
+
+    postgresql_config = {
+        "start_url": "https://www.postgresql.org/docs/current/index.html",
+        "allowed_domains": ["www.postgresql.org"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "#docContent",
+        "output_file": "postgresql_docs.json"
+    }
+
+    mysql_config = {
+        "start_url": "https://dev.mysql.com/doc/refman/8.4/en/introduction.html",
+        "allowed_domains": ["dev.mysql.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "#docs-main-inner",
+        "output_file": "mysql_docs.json"
+    }
+
+    mongodb_config = {
+        "start_url": "https://www.mongodb.com/docs/manual/",
+        "allowed_domains": ["www.mongodb.com"],
+        "blocked_domains": [],
+        "max_depth": 2,
+        "max_pages": 300,
+        "css_selector": "#template-container",
+        "output_file": "mongodb_docs.json"
+    }
+
+    selected_config = mongodb_config
     
     content_dict = await crawl_website(**selected_config)
     

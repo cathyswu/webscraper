@@ -9,7 +9,7 @@ async def main():
     # Create an instance of AsyncWebCrawler
     async with AsyncWebCrawler() as crawler:
         # Run the crawler on a URL
-        result = await crawler.arun(url="https://docs.djangoproject.com/en/5.2/topics/testing/")
+        result = await crawler.arun(url="https://www.jenkins.io/doc/")
 
         # Print the extracted content (result.html, result.markdown)
         print(result.html)
